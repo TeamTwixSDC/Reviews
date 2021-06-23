@@ -1,0 +1,3 @@
+config.ts
+*.csv
+node_modules/

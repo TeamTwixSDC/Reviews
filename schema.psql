@@ -1,0 +1,37 @@
+CREATE TABLE reviews (
+  review_id INTEGER NOT NULL PRIMARY KEY,
+  product_id INTEGER NOT NULL,
+  rating SMALLINT NOT NULL,
+  date BIGINT NOT NULL ,
+  summary VARCHAR ( 150 ),
+  body VARCHAR ( 1000 ) NOT NULL,
+  recommend BOOLEAN NOT NULL,
+  reported BOOLEAN DEFAULT false,
+  reviewer_name VARCHAR ( 40 ) NOT NULL,
+  reviewer_email VARCHAR ( 50 ) NOT NULL,
+  response VARCHAR ( 150 ),
+  helpfulness SMALLINT DEFAULT 0
+);
+
+CREATE TABLE characteristics (
+  id INTEGER NOT NULL PRIMARY KEY,
+  product_id INTEGER NOT NULL,
+  name VARCHAR ( 10 ) NOT NULL
+);
+
+CREATE TABLE photos (
+  id INTEGER NOT NULL PRIMARY KEY,
+  review_id INTEGER NOT NULL REFERENCES reviews(review_id),
+  url VARCHAR ( 250 ) NOT NULL
+);
+
+CREATE TABLE characteristic_reviews (
+  id INTEGER NOT NULL PRIMARY KEY,
+  characteristic_id INTEGER NOT NULL REFERENCES characteristics(id),
+  review_id INTEGER NOT NULL REFERENCES reviews(review_id),
+  value SMALLINT NOT NULL
+);
+
+/*
+COPY [table_name] FROM '/home/imaycode/hackreactor/senior-phase/Reviews/[file_name].csv' DELIMITER ',' CSV HEADER;
+*/
